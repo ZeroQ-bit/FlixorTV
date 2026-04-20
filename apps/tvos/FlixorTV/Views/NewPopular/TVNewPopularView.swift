@@ -86,7 +86,7 @@ struct TVNewPopularView: View {
         .task {
             await viewModel.load()
         }
-        .onChange(of: viewModel.activeTab) { _ in
+        .onChange(of: viewModel.activeTab) { _, _ in
             focusedRowId = nil
             nextRowToReceiveFocus = nil
         }

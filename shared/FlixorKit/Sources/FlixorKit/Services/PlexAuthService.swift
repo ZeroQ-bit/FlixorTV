@@ -324,7 +324,7 @@ public class PlexAuthService {
                     connections: connections.map { conn in
                         PlexConnectionResource(
                             uri: conn.uri,
-                            `protocol`: conn.protocol,
+                            protocol: conn.protocol,
                             local: conn.local,
                             relay: conn.relay,
                             IPv6: conn.IPv6

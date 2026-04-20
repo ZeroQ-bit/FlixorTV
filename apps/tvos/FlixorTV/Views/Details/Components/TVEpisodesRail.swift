@@ -80,7 +80,7 @@ private struct SeasonRow: View {
     let season: TVDetailsViewModel.Season
     let isSelected: Bool
     let onSelect: () -> Void
-    @State private var isFocused = false
+    @FocusState private var isFocused: Bool
 
     private var backgroundColor: Color {
         if isFocused || isSelected {
@@ -106,8 +106,9 @@ private struct SeasonRow: View {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .stroke(Color.white.opacity(isFocused ? 0.45 : (isSelected ? 0.25 : 0.08)), lineWidth: isFocused ? 3 : 1)
         )
-        .focusable(true) { focus in
-            isFocused = focus
+        .focusable()
+        .focused($isFocused)
+        .onChange(of: isFocused) { _, focus in
             if focus && !isSelected {
                 onSelect()
             }
@@ -173,7 +174,7 @@ private struct EpisodeRow: View {
     let isDefault: Bool
     var focusNS: Namespace.ID
 
-    @State private var isFocused = false
+    @FocusState private var isFocused: Bool
 
     var body: some View {
         HStack(spacing: 26) {
@@ -224,9 +225,8 @@ private struct EpisodeRow: View {
             RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .stroke(Color.white.opacity(isFocused ? 0.55 : 0.08), lineWidth: isFocused ? 3 : 1)
         )
-        .focusable(true) { focus in
-            isFocused = focus
-        }
+        .focusable()
+        .focused($isFocused)
         .prefersDefaultFocus(isDefault, in: focusNS)
         .animation(.easeOut(duration: UX.focusDur), value: isFocused)
     }

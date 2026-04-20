@@ -22,7 +22,7 @@ struct TVDetailsTabsBar: View {
             baseline
         }
         .padding(.top, 12)
-        .onChange(of: focused) { newTab in
+        .onChange(of: focused) { _, newTab in
             reportFocus = (newTab != nil)
 
             guard let newTab = newTab else {

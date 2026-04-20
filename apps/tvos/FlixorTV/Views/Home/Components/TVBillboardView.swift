@@ -34,7 +34,7 @@ struct TVBillboardView: View {
         .fullScreenCover(item: $showingDetails) { item in
             TVDetailsView(item: item)
         }
-        .onChange(of: focusedButton) { newValue in
+        .onChange(of: focusedButton) { _, newValue in
             isHeroFocused = (newValue != nil)
         }
         .preference(key: BillboardFocusKey.self, value: focusedButton != nil)
@@ -280,7 +280,7 @@ private struct CTAButton: View {
     var isDefaultFocusTarget: Bool = false
     var focusNS: Namespace.ID? = nil
 
-    @State private var focused = false
+    @FocusState private var focused: Bool
 
     // Computed property for background color
     private var backgroundColor: Color {
@@ -320,7 +320,8 @@ private struct CTAButton: View {
         .padding(.vertical, 10)
         .background(Capsule().fill(backgroundColor))
         .overlay(Capsule().stroke(Color.white.opacity(strokeOpacity), lineWidth: 2))
-        .focusable(true) { focused in self.focused = focused }
+        .focusable()
+        .focused($focused)
         .modifier(PreferredDefaultFocusModifier(enabled: isDefaultFocusTarget, ns: focusNS))
         .scaleEffect(focused ? UX.focusScale : 1.0)
         .shadow(color: .black.opacity(focused ? 0.35 : 0.0), radius: 12, y: 4)

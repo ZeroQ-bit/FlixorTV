@@ -83,7 +83,8 @@ final class MPVPlayerViewController: UIViewController {
 
         // https://mpv.io/manual/stable/#options
         checkError(mpv_request_log_messages(mpv, "no"))
-        checkError(mpv_set_option(mpv, "wid", MPV_FORMAT_INT64, &metalLayer))
+        var windowID = Int64(bitPattern: UInt64(UInt(bitPattern: Unmanaged.passUnretained(metalLayer).toOpaque())))
+        checkError(mpv_set_option(mpv, "wid", MPV_FORMAT_INT64, &windowID))
         checkError(mpv_set_option_string(mpv, "vo", "gpu-next"))
         checkError(mpv_set_option_string(mpv, "gpu-api", "vulkan"))
         checkError(mpv_set_option_string(mpv, "gpu-context", "moltenvk"))
@@ -350,8 +351,6 @@ final class MPVPlayerViewController: UIViewController {
                             DispatchQueue.main.async {
                                 self.playDelegate?.propertyChange(mpv: mpv, property: playerProperty, data: value)
                             }
-                        default:
-                            break
                         }
                     }
                 case MPV_EVENT_END_FILE:

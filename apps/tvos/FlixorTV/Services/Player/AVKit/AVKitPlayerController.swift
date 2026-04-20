@@ -70,14 +70,18 @@ class AVKitPlayerController: ObservableObject, PlayerController {
         // Observe rate changes
         player.publisher(for: \.rate)
             .sink { [weak self] rate in
-                self?.isPaused = rate == 0
+                Task { @MainActor [weak self] in
+                    self?.isPaused = rate == 0
+                }
             }
             .store(in: &cancellables)
 
         // Add time observer (updates every 0.5s)
         let interval = CMTime(seconds: 0.5, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         timeObserver = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
-            self?.currentTime = time.seconds
+            Task { @MainActor [weak self] in
+                self?.currentTime = time.seconds
+            }
         }
 
         state = .ready
@@ -330,7 +334,7 @@ class AVKitPlayerController: ObservableObject, PlayerController {
 
         // Observe loaded time ranges (for buffering state)
         item.publisher(for: \.loadedTimeRanges)
-            .sink { [weak self] _ in
+            .sink { _ in
                 // Could update buffering state here
             }
             .store(in: &cancellables)
@@ -386,7 +390,7 @@ class AVKitPlayerController: ObservableObject, PlayerController {
 
                 // Get track properties (these are synchronous)
                 let trackID = track.trackID
-                let isEnabled = track.isEnabled
+                let isEnabled = (try? await track.load(.isEnabled)) ?? false
                 print("   Track ID: \(trackID), Enabled: \(isEnabled)")
 
                 // Load format descriptions for HDR detection
@@ -394,10 +398,9 @@ class AVKitPlayerController: ObservableObject, PlayerController {
                     print("   Format descriptions: \(formatDescriptions.count)")
 
                     for description in formatDescriptions {
-                        let formatDesc = description as! CMFormatDescription
+                        let formatDesc = description
 
                         // Log codec info
-                        let mediaType = CMFormatDescriptionGetMediaType(formatDesc)
                         let mediaSubType = CMFormatDescriptionGetMediaSubType(formatDesc)
                         let codecString = String(format: "%c%c%c%c",
                             (mediaSubType >> 24) & 0xff,
@@ -467,7 +470,10 @@ class AVKitPlayerController: ObservableObject, PlayerController {
         let time = CMTime(seconds: seconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         player.seek(to: time) { [weak self] finished in
             if finished {
-                self?.state = self?.isPaused == true ? .paused : .playing
+                Task { @MainActor [weak self] in
+                    guard let self else { return }
+                    self.state = self.isPaused ? .paused : .playing
+                }
             }
         }
     }

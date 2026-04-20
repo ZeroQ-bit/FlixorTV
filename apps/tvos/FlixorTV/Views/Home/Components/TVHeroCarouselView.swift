@@ -65,19 +65,19 @@ struct TVHeroCarouselView: View {
             focusRequestTask?.cancel()
             focusRequestTask = nil
         }
-        .onChange(of: items.map(\.id)) { _ in
+        .onChange(of: items.map(\.id)) { _, _ in
             clampIndex()
             prefetchAdjacentHeroImages()
             restartAutoAdvance()
         }
-        .onChange(of: currentIndex) { _ in
+        .onChange(of: currentIndex) { _, _ in
             prefetchAdjacentHeroImages()
             restartAutoAdvance()
         }
-        .onChange(of: isBillboardFocused) { _ in
+        .onChange(of: isBillboardFocused) { _, _ in
             restartAutoAdvance()
         }
-        .onChange(of: focusRequestToken) { token in
+        .onChange(of: focusRequestToken) { _, token in
             guard token != nil else { return }
             requestDefaultFocus()
         }

@@ -63,7 +63,9 @@ public actor CacheManager: CacheProtocol {
             self.diskCacheURL = nil
         }
 
-        startCleanupTimer()
+        Task {
+            await startCleanupTimer()
+        }
     }
 
     deinit {
@@ -261,7 +263,7 @@ public actor CacheManager: CacheProtocol {
     }
 
     private func clearDiskCache() async {
-        guard let diskCacheURL = diskCacheURL else { return }
+        guard let diskCacheURL else { return }
 
         do {
             let contents = try fileManager.contentsOfDirectory(at: diskCacheURL, includingPropertiesForKeys: nil)
@@ -274,7 +276,7 @@ public actor CacheManager: CacheProtocol {
     }
 
     private func invalidateDiskPattern(regex: NSRegularExpression) async {
-        guard let diskCacheURL = diskCacheURL else { return }
+        guard diskCacheURL != nil else { return }
 
         // We need to read each file to check the original key
         // This is expensive, so we store a key mapping file

@@ -229,16 +229,18 @@ class APIClient: ObservableObject {
             var logoUrl: String?
             if let tmdbId = tmdbId {
                 let images = try await FlixorCore.shared.tmdb.getImages(mediaType: mediaType, id: tmdbId)
-                if let backdrop = images.backdrops.first {
-                    backdropUrl = "https://image.tmdb.org/t/p/w1280\(backdrop.filePath)"
+                if let backdropPath = images.backdrops.first?.filePath {
+                    backdropUrl = "https://image.tmdb.org/t/p/w1280\(backdropPath)"
                 }
-                if let poster = images.posters.first {
-                    posterUrl = "https://image.tmdb.org/t/p/w500\(poster.filePath)"
+                if let posterPath = images.posters.first?.filePath {
+                    posterUrl = "https://image.tmdb.org/t/p/w500\(posterPath)"
                 }
                 if let logo = images.logos.first(where: { $0.iso6391 == "en" })
                     ?? images.logos.first(where: { ($0.iso6391 ?? "").isEmpty })
                     ?? images.logos.first {
-                    logoUrl = "https://image.tmdb.org/t/p/w500\(logo.filePath)"
+                    if let logoPath = logo.filePath {
+                        logoUrl = "https://image.tmdb.org/t/p/w500\(logoPath)"
+                    }
                 }
             }
 
@@ -764,9 +766,6 @@ class APIClient: ObservableObject {
                 for item in items {
                     // Try to get TMDB ID from full metadata
                     let tmdbGuid = await plexTv.getTMDBIdForWatchlistItem(item)
-                    if let tmdbGuid = tmdbGuid {
-                    } else {
-                    }
 
                     let guid = item.guids.first // Use first guid as primary
 
@@ -1391,10 +1390,7 @@ extension APIClient {
         let encoded = ratingKey.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ratingKey
         let path = "/api/plex/markers/\(encoded)"
 
-        let markers: [PlexMarker] = try await get(path)
-        for marker in markers {
-        }
-        return markers
+        return try await get(path)
     }
 }
 

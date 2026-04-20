@@ -87,13 +87,13 @@ struct TVDetailsInfoGrid: View {
         }
         .padding(.horizontal, 80)
         .padding(.bottom, 80)
-        .onChange(of: isFocused) { newValue in
+        .onChange(of: isFocused) { _, newValue in
             // Only report when gaining focus
             if newValue {
                 onFocusChange?(true)
             }
         }
-        .onChange(of: focusedSection) { newValue in
+        .onChange(of: focusedSection) { _, newValue in
             guard let newValue else { return }
             lastFocusedSection = newValue
             if !isFocused {
@@ -848,7 +848,7 @@ private struct CastCrewCard: View {
         .scaleEffect(isFocused ? 1.08 : 1.0)
         .shadow(color: .black.opacity(isFocused ? 0.5 : 0.1), radius: isFocused ? 16 : 4, y: isFocused ? 10 : 2)
         .animation(.easeOut(duration: 0.18), value: isFocused)
-        .onChange(of: isFocused) { newValue in
+        .onChange(of: isFocused) { _, newValue in
             if newValue {
                 onFocusChange?(true)
             }

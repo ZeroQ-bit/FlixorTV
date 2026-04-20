@@ -435,7 +435,7 @@ public class PlexServerService {
         let opts = options ?? TranscodeOptions()
         let sessionId = opts.sessionId ?? UUID().uuidString.replacingOccurrences(of: "-", with: "").prefix(15).lowercased()
 
-        var params: [String: String] = [
+        let params: [String: String] = [
             "hasMDE": "1",
             "path": "/library/metadata/\(ratingKey)",
             "mediaIndex": "0",

@@ -99,7 +99,7 @@ struct TVCarouselRow: View {
                     .frame(height: (kind == .poster ? posterSize.height : landscapeSize.height), alignment: .bottom)
                 }
                 .onAppear { scrollProxy = proxy }
-                .onChange(of: focusedID) { newValue in
+                .onChange(of: focusedID) { _, newValue in
                     guard kind == .poster else { return }
                     expansionTask?.cancel()
 
@@ -159,7 +159,7 @@ struct TVCarouselRow: View {
             .preference(key: RowFocusKey.self, value: focusedID != nil ? sectionId : nil)
             // Publish focused item ID upwards (used for remembering scroll position)
             .preference(key: RowItemFocusKey.self, value: RowItemFocusValue(rowId: focusedID != nil ? sectionId : nil, itemId: focusedID))
-            .onChange(of: defaultFocus) { newValue in
+            .onChange(of: defaultFocus) { _, newValue in
                 // When this row becomes the default focus target, FORCE focus to preferred item
                 if newValue {
                     let targetItemId = preferredFocusItemId ?? items.first?.id

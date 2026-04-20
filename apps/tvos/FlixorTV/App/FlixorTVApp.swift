@@ -44,10 +44,10 @@ struct FlixorTVApp: App {
                     // Restore session on app launch
                     await session.restoreSession()
                 }
-                .onChange(of: profileSettings.tmdbLanguage) { _ in
+                .onChange(of: profileSettings.tmdbLanguage) { _, _ in
                     Task { await applyTMDBLanguagePolicy() }
                 }
-                .onChange(of: profileSettings.tmdbLocalizedMetadata) { _ in
+                .onChange(of: profileSettings.tmdbLocalizedMetadata) { _, _ in
                     Task { await applyTMDBLanguagePolicy() }
                 }
         }

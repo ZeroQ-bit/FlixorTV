@@ -156,7 +156,7 @@ private struct SectionPill: View {
     let section: TVLibraryViewModel.LibrarySectionSummary
     let isActive: Bool
 
-    @State private var isFocused: Bool = false
+    @FocusState private var isFocused: Bool
 
     var body: some View {
         Text(section.title.uppercased())
@@ -173,9 +173,8 @@ private struct SectionPill: View {
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
                     .stroke(strokeColor, lineWidth: strokeWidth)
             )
-            .focusable(true) { focused in
-                isFocused = focused
-            }
+            .focusable()
+            .focused($isFocused)
             .scaleEffect(isFocused ? 1.08 : 1.0)
             .shadow(color: .black.opacity(isFocused ? 0.4 : 0.2), radius: isFocused ? 16 : 8, y: isFocused ? 8 : 4)
             .animation(.easeOut(duration: UX.focusDur), value: isFocused)
@@ -226,7 +225,7 @@ private struct FilterButton: View {
     let title: String
     let value: String?
 
-    @State private var isFocused: Bool = false
+    @FocusState private var isFocused: Bool
 
     var body: some View {
         HStack(spacing: 8) {
@@ -250,9 +249,8 @@ private struct FilterButton: View {
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .stroke(strokeColor, lineWidth: strokeWidth)
         )
-        .focusable(true) { focused in
-            isFocused = focused
-        }
+        .focusable()
+        .focused($isFocused)
         .scaleEffect(isFocused ? 1.06 : 1.0)
         .shadow(color: .black.opacity(isFocused ? 0.35 : 0.0), radius: isFocused ? 12 : 0, y: isFocused ? 6 : 0)
         .animation(.easeOut(duration: UX.focusDur), value: isFocused)

@@ -78,7 +78,7 @@ struct TVLibraryView: View {
         .fullScreenCover(item: $selectedItem) { item in
             TVDetailsView(item: item)
         }
-        .onChange(of: focusedID) { newFocusedID in
+        .onChange(of: focusedID) { _, newFocusedID in
             // Cancel any existing debounce task
             focusDebounceTask?.cancel()
 

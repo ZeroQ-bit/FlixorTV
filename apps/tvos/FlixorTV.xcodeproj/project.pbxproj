@@ -33,7 +33,6 @@
 		6F6F6F6F6F70000100010001 /* MPVPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F6F6F6F70000100010000 /* MPVPlayerController.swift */; };
 		7322C892CD5A6930B58C307D /* TVCarouselRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E3CFE272780A78553EA7A /* TVCarouselRow.swift */; };
 		741E53CACE516C2FDFC5E8A0 /* AVKitPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB9D931BF4259DD9A02FC4F /* AVKitPlayerView.swift */; };
-		746BB5FF893361C86CA89E82 /* FlixorTV.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = A409FFB5441617D6FD5F3F05 /* FlixorTV.xcodeproj */; };
 		7486665C9ADAC92EA84E04C0 /* TopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3616010CF268C0F1FAB2DA89 /* TopNavBar.swift */; };
 		802912855B2E25460FBFF4EC /* TVDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13E40EFDCF43AA806E198BC /* TVDetailsViewModel.swift */; };
 		8C9B3E25A9F10CF2B3B26544 /* PlexStreamingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9616674FFAC797B4B00C38 /* PlexStreamingManager.swift */; };
@@ -55,6 +54,7 @@
 		A1000000000000000000000D /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001C /* ImageService.swift */; };
 		A1000000000000000000000E /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001D /* CachedAsyncImage.swift */; };
 		A1B2C3D4E5F60718293A4B5D /* TVHeroCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* TVHeroCarouselView.swift */; };
+		B13D9D0474B2E7577E7C7416 /* PlayerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A3AEB169E727C4394EC77 /* PlayerSettings.swift */; };
 		B20000000000000000000001 /* TVWatchlistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000011 /* TVWatchlistController.swift */; };
 		B20000000000000000000002 /* TVFocusSurfaceStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000012 /* TVFocusSurfaceStyle.swift */; };
 		B20000000000000000000003 /* TVMyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000013 /* TVMyListView.swift */; };
@@ -64,7 +64,6 @@
 		B20000000000000000000007 /* TVNewPopularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000017 /* TVNewPopularView.swift */; };
 		B20000000000000000000008 /* TVNewPopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000018 /* TVNewPopularViewModel.swift */; };
 		B20000000000000000000009 /* TVNewPopularHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000019 /* TVNewPopularHero.swift */; };
-		B13D9D0474B2E7577E7C7416 /* PlayerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A3AEB169E727C4394EC77 /* PlayerSettings.swift */; };
 		C0600A369C9BB3EC7F66B320 /* UniversalPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03CCA45295916815C223056 /* UniversalPlayerView.swift */; };
 		C196CA26AB88809CD97F25B1 /* TVHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4374B38CC057026BF7C73418 /* TVHomeView.swift */; };
 		C898CFC0A58E2042F32B5DF6 /* TVCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640CCCC115D09CBAF9F0B3 /* TVCards.swift */; };
@@ -122,7 +121,6 @@
 		A1000000000000000000001D /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 		A13E40EFDCF43AA806E198BC /* TVDetailsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TVDetailsViewModel.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A4B5C /* TVHeroCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVHeroCarouselView.swift; sourceTree = "<group>"; };
-		A409FFB5441617D6FD5F3F05 /* FlixorTV.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FlixorTV.xcodeproj; sourceTree = "<group>"; };
 		A4B42D166FB2D68A1B927884 /* FlixorTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlixorTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A560351FB7F36D1273F8DFA3 /* MainTVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTVView.swift; sourceTree = "<group>"; };
 		B20000000000000000000011 /* TVWatchlistController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVWatchlistController.swift; sourceTree = "<group>"; };
@@ -235,50 +233,6 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		B20000000000000000000021 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				B20000000000000000000011 /* TVWatchlistController.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		B20000000000000000000022 /* MyList */ = {
-			isa = PBXGroup;
-			children = (
-				B20000000000000000000013 /* TVMyListView.swift */,
-				B20000000000000000000014 /* TVMyListViewModel.swift */,
-			);
-			path = MyList;
-			sourceTree = "<group>";
-		};
-		B20000000000000000000023 /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				B20000000000000000000015 /* TVSearchView.swift */,
-				B20000000000000000000016 /* TVSearchViewModel.swift */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		B20000000000000000000024 /* NewPopular */ = {
-			isa = PBXGroup;
-			children = (
-				B20000000000000000000017 /* TVNewPopularView.swift */,
-				B20000000000000000000018 /* TVNewPopularViewModel.swift */,
-				B20000000000000000000025 /* Components */,
-			);
-			path = NewPopular;
-			sourceTree = "<group>";
-		};
-		B20000000000000000000025 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				B20000000000000000000019 /* TVNewPopularHero.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		4DE18658CB336B32CB53030A /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,7 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				C0092F3794E12E5F2884741E /* Assets.xcassets */,
-				A409FFB5441617D6FD5F3F05 /* FlixorTV.xcodeproj */,
 				6D6DB6CA3ABEE2740792235F /* Info.plist */,
 				4DE18658CB336B32CB53030A /* App */,
 				85C3A10F3B32F5AFB1E035D7 /* Theme */,
@@ -430,6 +383,50 @@
 			path = Details;
 			sourceTree = "<group>";
 		};
+		B20000000000000000000021 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B20000000000000000000011 /* TVWatchlistController.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B20000000000000000000022 /* MyList */ = {
+			isa = PBXGroup;
+			children = (
+				B20000000000000000000013 /* TVMyListView.swift */,
+				B20000000000000000000014 /* TVMyListViewModel.swift */,
+			);
+			path = MyList;
+			sourceTree = "<group>";
+		};
+		B20000000000000000000023 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				B20000000000000000000015 /* TVSearchView.swift */,
+				B20000000000000000000016 /* TVSearchViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		B20000000000000000000024 /* NewPopular */ = {
+			isa = PBXGroup;
+			children = (
+				B20000000000000000000017 /* TVNewPopularView.swift */,
+				B20000000000000000000018 /* TVNewPopularViewModel.swift */,
+				B20000000000000000000025 /* Components */,
+			);
+			path = NewPopular;
+			sourceTree = "<group>";
+		};
+		B20000000000000000000025 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B20000000000000000000019 /* TVNewPopularHero.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		CC43B687C576D4A5E6993B54 /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,7 +516,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				48E547380669970236CE69C3 /* Assets.xcassets in Resources */,
-				746BB5FF893361C86CA89E82 /* FlixorTV.xcodeproj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,7 +604,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GGZ5B2R5VP;
+				DEVELOPMENT_TEAM = D278M74A3H;
 				INFOPLIST_FILE = FlixorTV/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -702,7 +698,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GGZ5B2R5VP;
+				DEVELOPMENT_TEAM = D278M74A3H;
 				INFOPLIST_FILE = FlixorTV/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				LD_RUNPATH_SEARCH_PATHS = (

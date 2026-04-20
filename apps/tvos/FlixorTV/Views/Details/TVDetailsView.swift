@@ -559,7 +559,7 @@ private struct TVDetailsHeroSection: View {
             .clipShape(Rectangle())
         }
         .frame(height: 840)
-        .onChange(of: focusedButton) { newValue in
+        .onChange(of: focusedButton) { _, newValue in
             // Only report when hero gains focus (to reset blur)
             if newValue != nil {
                 onFocusChange?(true)

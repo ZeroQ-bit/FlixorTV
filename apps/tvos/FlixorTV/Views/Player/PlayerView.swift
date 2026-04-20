@@ -985,7 +985,7 @@ private struct TVPlayerTimelineScrubber: View {
 
             scheduleCommit()
         }
-        .onChange(of: isFocused) { focused in
+        .onChange(of: isFocused) { _, focused in
             if !focused {
                 finishScrubbingIfNeeded()
             }

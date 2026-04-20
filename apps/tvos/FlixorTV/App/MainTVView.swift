@@ -167,13 +167,13 @@ struct MainTVView: View {
             ))
             .environmentObject(appState)
         }
-        .onChange(of: session.isAuthenticated) { authed in
+        .onChange(of: session.isAuthenticated) { _, _ in
             Task { await updatePhaseFromSession() }
         }
-        .onChange(of: profileSettings.showNewPopularTab) { _ in
+        .onChange(of: profileSettings.showNewPopularTab) { _, _ in
             enforceDestinationAvailability()
         }
-        .onChange(of: profileSettings.discoveryDisabled) { _ in
+        .onChange(of: profileSettings.discoveryDisabled) { _, _ in
             enforceDestinationAvailability()
         }
         .onDisappear {

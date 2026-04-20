@@ -117,7 +117,8 @@ public class PlexTvService {
                 }
             }
         } catch {
-            print("⚠️ [PlexTv] Failed to get metadata for \(item.title): \(error)")
+            let itemTitle = item.title ?? "<unknown>"
+            print("⚠️ [PlexTv] Failed to get metadata for \(itemTitle): \(error)")
         }
 
         return nil

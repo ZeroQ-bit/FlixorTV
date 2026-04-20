@@ -825,9 +825,6 @@ class TVDetailsViewModel: ObservableObject {
             return guids.contains("tmdb://\(tmdbId)") || guids.contains("themoviedb://\(tmdbId)")
         })
 
-        if let exactMatch = match {
-        }
-
         // Score-based fallback
         if match == nil {
             var bestScore = -1
@@ -837,8 +834,6 @@ class TVDetailsViewModel: ObservableObject {
                     bestScore = sc
                     match = c
                 }
-            }
-            if let scoreMatch = match {
             }
         }
 

@@ -178,12 +178,11 @@ struct TVHomeView: View {
         .ignoresSafeArea(edges: .top)
         // no permanent inset; content can scroll edge-to-edge under the native sidebar shell
         .onPreferenceChange(RowFocusKey.self) { newId in
-            if let newId {
-                clearRowFocusTask?.cancel()
-            } else {
+            clearRowFocusTask?.cancel()
+
+            guard let newId else {
                 // During horizontal focus movement, tvOS may emit brief nil focus pulses.
                 // Clear row focus only if nil persists, which indicates real exit to hero/nav.
-                clearRowFocusTask?.cancel()
                 clearRowFocusTask = Task {
                     try? await Task.sleep(nanoseconds: 140_000_000)
                     guard !Task.isCancelled else { return }
@@ -231,7 +230,7 @@ struct TVHomeView: View {
                 rowLastFocusedItem[rowId] = itemId
             }
         }
-        .onChange(of: focusHandoffToken) { token in
+        .onChange(of: focusHandoffToken) { _, token in
             guard let token else { return }
             focusedRowId = nil
             nextRowToReceiveFocus = nil
@@ -263,7 +262,7 @@ struct TVHomeView: View {
                 await vm.fetchUltraBlurColors(for: active)
             }
         }
-        .onChange(of: session.isAuthenticated) { authed in
+        .onChange(of: session.isAuthenticated) { _, authed in
             if authed {
                 Task { await vm.load() }
                 vm.startDynamicSectionPolling()
@@ -271,13 +270,13 @@ struct TVHomeView: View {
                 vm.stopDynamicSectionPolling()
             }
         }
-        .onChange(of: profileSettings.groupRecentlyAddedEpisodes) { _ in
+        .onChange(of: profileSettings.groupRecentlyAddedEpisodes) { _, _ in
             Task { await vm.load() }
         }
-        .onChange(of: profileSettings.enabledLibraryKeys) { _ in
+        .onChange(of: profileSettings.enabledLibraryKeys) { _, _ in
             Task { await vm.load() }
         }
-        .onChange(of: vm.billboardItems.map(\.id)) { _ in
+        .onChange(of: vm.billboardItems.map(\.id)) { _, _ in
             if billboardIndex >= vm.billboardItems.count {
                 billboardIndex = max(0, vm.billboardItems.count - 1)
             }
@@ -285,12 +284,12 @@ struct TVHomeView: View {
                 Task { await vm.fetchUltraBlurColors(for: active) }
             }
         }
-        .onChange(of: billboardIndex) { _ in
+        .onChange(of: billboardIndex) { _, _ in
             if let active = currentBillboardItem {
                 Task { await vm.fetchUltraBlurColors(for: active) }
             }
         }
-        .onChange(of: focusedRowId) { rowId in
+        .onChange(of: focusedRowId) { _, rowId in
             // Debounce gradient color changes to avoid recomputes during fast scrolling
             gradientDebounceTask?.cancel()
             gradientDebounceTask = Task {
@@ -308,7 +307,7 @@ struct TVHomeView: View {
                 }
             }
         }
-        .onChange(of: vm.billboardUltraBlurColors) { billboardColors in
+        .onChange(of: vm.billboardUltraBlurColors) { _, billboardColors in
             // Update gradient to billboard colors only if no row is focused
             if focusedRowId == nil, let colors = billboardColors {
                 if !colorsEqual(currentGradientColors, colors) {

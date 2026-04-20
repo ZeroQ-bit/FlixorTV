@@ -47,7 +47,7 @@ struct TVSearchView: View {
                 await viewModel.loadInitialContent()
             }
         }
-        .onChange(of: profileSettings.includeTmdbInSearch) { _ in
+        .onChange(of: profileSettings.includeTmdbInSearch) { _, _ in
             Task { await viewModel.loadInitialContent() }
         }
         .fullScreenCover(item: $selectedItem) { item in

@@ -43,7 +43,7 @@ struct TVTrailerCard: View {
         .buttonStyle(NoHighlightButtonStyle())
         .focused($isFocused)
         .animation(.easeOut(duration: 0.18), value: isFocused)
-        .onChange(of: isFocused) { newValue in
+        .onChange(of: isFocused) { _, newValue in
             if newValue {
                 onFocusChange?(true)
             }

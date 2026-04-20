@@ -31,9 +31,7 @@ struct TopNavBar: View {
             HStack(spacing: 24) {
                 ForEach(tabs, id: \.self) { tab in
                     NavPill(title: tab.title, isSelected: tab == selected, isFocused: focusedTab == tab)
-                        .focusable(true) { focused in
-                            if focused { focusedTab = tab }
-                        }
+                        .focusable()
                         .focused($focusedTab, equals: tab)
                         .simultaneousGesture(
                             TapGesture().onEnded { selected = tab }
@@ -53,7 +51,7 @@ struct TopNavBar: View {
         .background(.clear)
         .focusSection()
         .onAppear { focusedTab = selected }
-        .onChange(of: selected) { newValue in
+        .onChange(of: selected) { _, newValue in
             // Keep visual focus aligned when selected tab changes externally.
             if tabs.contains(newValue) && focusedTab != newValue {
                 focusedTab = newValue
@@ -109,6 +107,7 @@ private struct IconButton: View {
     let systemName: String
     @Binding var focused: Bool
     var action: () -> Void
+    @FocusState private var isFocused: Bool
 
     var body: some View {
         Image(systemName: systemName)
@@ -119,7 +118,11 @@ private struct IconButton: View {
             .overlay(Circle().stroke(Color.white.opacity(focused ? 0.35 : 0.0), lineWidth: 1))
             .scaleEffect(focused ? UX.focusScale : 1.0)
             .animation(.easeOut(duration: UX.focusDur), value: focused)
-            .focusable(true) { f in focused = f }
+            .focusable()
+            .focused($isFocused)
+            .onChange(of: isFocused) { _, newValue in
+                focused = newValue
+            }
             .onTapGesture { action() }
     }
 }
