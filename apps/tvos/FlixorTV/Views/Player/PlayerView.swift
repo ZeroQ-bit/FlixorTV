@@ -134,8 +134,6 @@ struct PlayerView: View {
                         .transition(.opacity)
                     }
                 }
-            } else if isAVKitActive {
-                avkitHeaderOverlay
             }
         }
         .onAppear {
@@ -188,32 +186,6 @@ struct PlayerView: View {
                     onClose: { activeSettingsSheet = nil }
                 )
             }
-        }
-    }
-
-    private var avkitHeaderOverlay: some View {
-        VStack {
-            HStack {
-                Button(action: closePlayer) {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 40))
-                        .foregroundColor(.white)
-                }
-                .padding()
-
-                Spacer()
-
-                Text(playerSettings.backend.rawValue)
-                    .font(.caption)
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(Color.black.opacity(0.5))
-                    .cornerRadius(8)
-                    .padding()
-            }
-
-            Spacer()
         }
     }
 
